@@ -16,7 +16,7 @@ public class Main {
             System.out.println("2. Make a deposit");
             System.out.println("3. Make a withdraw");
             System.out.println("4. Exit application");
-            System.out.println();
+
             System.out.print("Please enter your choice: ");
             String input = scan.nextLine().trim();
 
@@ -47,9 +47,26 @@ public class Main {
     }
 
     private static void makeDeposit() {
+        double amount = 0;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter amount to make a deposit");
+        String input =scan.nextLine();
+        try {
+            amount = Double.parseDouble(input);
+            balance = balance + amount;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("*****************************************");
+        System.out.println("Your account balance is "+ balance);
+        System.out.println("*****************************************");
     }
 
     private static void viewAccountBalance() {
+        System.out.println("*****************************************");
+        System.out.println("Your account balance is "+ balance);
+        System.out.println("*****************************************");
 
     }
 }
