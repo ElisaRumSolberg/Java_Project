@@ -24,7 +24,9 @@ public class Main {
                 choice = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid choice. Please enter a number.");
+
                 choice = -1;
+                continue;
             }
 
 
@@ -47,21 +49,34 @@ public class Main {
     }
 
     private static void makeDeposit() {
-        double amount = 0;
+
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter amount to make a deposit");
-        String input =scan.nextLine();
+        double amount ;
+    while(true) {
+        System.out.print("Enter amount to make a deposit: ");
+        String input = scan.nextLine().trim();
+        if (input.isEmpty()) {
+            System.out.println("Please enter a valid amount to make a deposit: ");
+            continue;
+        }
         try {
             amount = Double.parseDouble(input);
-            balance = balance + amount;
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
-        }
+            if (amount <= 0) {
+                System.out.println("Amount must be greater than 0.");
+                continue;
+            }
 
-        System.out.println("*****************************************");
-        System.out.println("Your account balance is "+ balance);
-        System.out.println("*****************************************");
-    }
+            balance += amount;
+            System.out.println("*****************************************");
+            System.out.println("Your account balance is "+ balance);
+            System.out.println("*****************************************");
+            break;
+
+        }catch (NumberFormatException e) {
+            System.out.println("Please enter a valid amount to make a deposit: ");
+        }
+   }
+}
 
     private static void viewAccountBalance() {
         System.out.println("*****************************************");
