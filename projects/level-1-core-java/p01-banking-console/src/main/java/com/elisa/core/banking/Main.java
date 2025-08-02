@@ -46,6 +46,36 @@ public class Main {
     }
 
     private static void makeWithdraw() {
+        Scanner scan = new Scanner(System.in);
+        double amount;
+        while (true) {
+            System.out.println("Please enter the amount to withdraw: ");
+            String input = scan.nextLine().trim();
+            if(input.isEmpty()){
+                System.out.println("Please enter the amount to withdraw: ");
+                continue;
+            }
+            try {
+                amount = Double.parseDouble(input);
+                if (amount > balance) {
+                    System.out.println("Insufficient funds.");
+                    continue;
+                }
+                if(amount < 0){
+                    System.out.println("Please enter a valid amount to withdraw: ");
+                    continue;
+                }
+                balance -= amount;
+                System.out.println("*****************************************");
+                System.out.println("Your account balance is "+ balance);
+                System.out.println("*****************************************");
+                break;
+
+            }catch (NumberFormatException e) {
+                System.out.println("Please enter a valid amount to withdraw: ");
+            continue;
+            }
+        }
     }
 
     private static void makeDeposit() {
