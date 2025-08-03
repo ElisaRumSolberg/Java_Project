@@ -3,7 +3,7 @@ package com.elisa.core.banking;
 import java.util.Scanner;
 
 public class Main {
-    static double balance ;
+    static double balance =0.0;
     public static void main(String[] args) {
 
 
@@ -14,7 +14,7 @@ public class Main {
 
             System.out.println("1. View account balance");
             System.out.println("2. Make a deposit");
-            System.out.println("3. Make a withdraw");
+            System.out.println("3. Make a withdrawal");
             System.out.println("4. Exit application");
 
             System.out.print("Please enter your choice: ");
@@ -32,27 +32,28 @@ public class Main {
 
             switch (choice) {
                 case 1-> viewAccountBalance();
-                case 2-> makeDeposit();
-                case 3 -> makeWithdraw();
+                case 2-> makeDeposit(scan);
+                case 3 -> makeWithdraw(scan);
                 case 4 -> exitMessage();
-                default -> System.out.println("Invalid choice");
+                default -> System.out.println("Invalid choice. Please select 1–4.");
             }
 
         } while (choice!=4);
+        scan.close();
     }
 
     private static void exitMessage() {
         System.out.println("Thank you for using our Banking System.");
     }
 
-    private static void makeWithdraw() {
-        Scanner scan = new Scanner(System.in);
+    private static void makeWithdraw(Scanner scan) {
+
         double amount;
         while (true) {
             System.out.println("Please enter the amount to withdraw: ");
             String input = scan.nextLine().trim();
             if(input.isEmpty()){
-                System.out.println("Please enter the amount to withdraw: ");
+                System.out.println("Amount cannot be empty. Please enter a number. ");
                 continue;
             }
             try {
@@ -61,7 +62,7 @@ public class Main {
                     System.out.println("Insufficient funds.");
                     continue;
                 }
-                if(amount < 0){
+                if(amount <= 0){
                     System.out.println("Please enter a valid amount to withdraw: ");
                     continue;
                 }
@@ -78,9 +79,8 @@ public class Main {
         }
     }
 
-    private static void makeDeposit() {
+    private static void makeDeposit(Scanner scan) {
 
-        Scanner scan = new Scanner(System.in);
         double amount ;
     while(true) {
         System.out.print("Enter amount to make a deposit: ");
